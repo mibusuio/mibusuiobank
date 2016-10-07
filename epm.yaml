@@ -1,0 +1,49 @@
+jobs:
+
+- name: setAccountBase
+  job:
+    set:
+      val: "fledesma@outlook.com"
+
+- name: setStorageBase
+  job:
+    set:
+      val: 5
+
+- name: setMessageBase
+  job:
+    set:
+      val: "esto es una prueba"
+
+- name: deployBank
+  job:
+    deploy:
+      contract: Bank.sol
+      wait: true
+
+- name: setAccount
+  job:
+    call:
+      destination: $deployBank
+      data: registerNewAccount $setAccountBase
+      wait: true
+
+- name: endowAccount
+  job:
+    call:
+      destination: $deployBank
+      data: endow $setAccountBase $setStorageBase $setMessageBase
+      wait: true
+
+- name: queryBalance
+  job:
+    query-contract:
+      destination: $deployBank
+      data: getBalance $setAccountBase
+
+- name: assertStorage
+  job:
+    assert:
+      key: $queryBalance
+      relation: eq
+      val: $setStorageBase
