@@ -41,7 +41,7 @@ function createAccount() {
   prompt.start();
   prompt.get(['value'], function (error, result) {
     if (error) { throw error }
-    registerNewAccount(5555)
+    registerNewAccount(toHex("micuenta@gmail.com"))
   });
 }
 
@@ -53,6 +53,14 @@ function registerNewAccount(value) {
     if (error) { throw error }
     //endow(function(){});
   });
+}
+
+function toHex(str) {
+  var hex = '';
+  for(var i=0;i<str.length;i++) {
+    hex += ''+str.charCodeAt(i).toString(16);
+  }
+  return hex;
 }
 
 // run
