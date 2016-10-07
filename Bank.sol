@@ -85,8 +85,7 @@ contract Bank {
             return NOT_OWNER;
         var account = accounts[user];
 
-        if (account.owner == ADDRESS_NULL)
-            return NO_TARGET;
+        
         accounts[user].balance += amount;
         return SUCCESS;
     }
