@@ -41,7 +41,7 @@ function createAccount() {
   prompt.start();
   prompt.get(['value'], function (error, result) {
     if (error) { throw error }
-    registerNewAccount(result.value.toString)
+    registerNewAccount(5555)
   });
 }
 
