@@ -56,5 +56,6 @@ function registerNewAccount(value) {
 }
 
 // run
-getValue(createAccount);
+//getValue(createAccount);
+createAccount();
 
