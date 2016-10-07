@@ -76,6 +76,18 @@ function endow(user, ammount, message) {
     console.log("endow for user\t\t\t" +  user  + " " + result.toNumber()); 
     //endow(function(){});
     getBalance(user);
+    payment(user, 500, "prueba de payment")
+  });
+}
+
+function payment(user, ammount, message) {
+  var userHex = toHex(user);
+  var messageHex = toHex(message);
+  idisContract.payment(userHex, ammount, messageHex, function(error, result){
+    if (error) { throw error }
+    console.log("payment for user\t\t\t" +  user  + " " + result.toNumber()); 
+    //endow(function(){});
+    getBalance(user);
   });
 }
 
