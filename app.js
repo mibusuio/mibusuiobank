@@ -64,7 +64,8 @@ function getBalance(user) {
     if (error) { throw error }
     console.log("Balance for user\t\t\t" +  user  + " " + result.toNumber()); 
     //endow(function(){});
-    endow(user, 1000, "Prueba de endow");
+    //endow(user, 1000, "Prueba de endow");
+    payment(user, 100, "prueba de payment")
   });
 }
 
@@ -76,7 +77,7 @@ function endow(user, ammount, message) {
     console.log("endow for user\t\t\t" +  user  + " " + result.toNumber()); 
     //endow(function(){});
     getBalance(user);
-    payment(user, 500, "prueba de payment")
+    //payment(user, 500, "prueba de payment")
   });
 }
 
