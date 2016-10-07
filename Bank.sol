@@ -91,6 +91,24 @@ contract Bank {
         return SUCCESS;
     }
 
+    function payment(bytes32 user, uint amount, bytes32 message) external returns (uint16 result) {
+        if (amount == 0)
+            return NO_AMOUNT;
+        if (msg.sender != owner)
+            return NOT_OWNER;
+        var account = accounts[user];
+
+        if (account.owner == ADDRESS_NULL)
+            return NO_TARGET;
+
+        if (accounts[user].balance < amount) {
+            return INSUFFICIENT_BALANCE;
+        }else {
+            accounts[user].balance -= amount;
+            return SUCCESS;
+        }
+    }
+
     /// @dev Transfer Ghavcoin between accounts. The sender is always the account that called the function.
     /// @param to The recipients public address.
     /// @param amount The amount.

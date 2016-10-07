@@ -15,7 +15,7 @@ jobs:
     set:
       val: "esto es una prueba"
 
-- name: deployBank
+- name: Bank
   job:
     deploy:
       contract: Bank.sol
@@ -24,21 +24,21 @@ jobs:
 - name: setAccount
   job:
     call:
-      destination: $deployBank
+      destination: $Bank
       data: registerNewAccount $setAccountBase
       wait: true
 
 - name: endowAccount
   job:
     call:
-      destination: $deployBank
+      destination: $Bank
       data: endow $setAccountBase $setStorageBase $setMessageBase
       wait: true
 
 - name: queryBalance
   job:
     query-contract:
-      destination: $deployBank
+      destination: $Bank
       data: getBalance $setAccountBase
 
 - name: assertStorage

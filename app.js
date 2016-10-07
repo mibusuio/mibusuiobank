@@ -51,6 +51,7 @@ function createAccount() {
 function registerNewAccount(value) {
   idisContract.registerNewAccount(value, function(error, result){
     if (error) { throw error }
+    console.log("Create account:\t\t\t" + result.toNumber()); 
     //endow(function(){});
   });
 }
