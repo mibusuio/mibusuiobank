@@ -64,6 +64,18 @@ function getBalance(user) {
     if (error) { throw error }
     console.log("Balance for user\t\t\t" +  user  + " " + result.toNumber()); 
     //endow(function(){});
+    endow(user, 1000, "Prueba de endow");
+  });
+}
+
+function endow(user, ammount, message) {
+  var userHex = toHex(user);
+  var messageHex = toHex(message);
+  idisContract.endow(userHex, ammount, messageHex, function(error, result){
+    if (error) { throw error }
+    console.log("endow for user\t\t\t" +  user  + " " + result.toNumber()); 
+    //endow(function(){});
+    getBalance(user);
   });
 }
 
