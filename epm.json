@@ -1,7 +1,7 @@
 {
   "assertStorage": "passed",
   "defaultAddr": "33C4D4D192708086869B0BC7FBAE51A2E0B9A37E",
-  "deployBank": "559A0C1ECD4C42C38C3BD14837C6200ADDCAA12A",
+  "Bank": "559A0C1ECD4C42C38C3BD14837C6200ADDCAA12A",
   "endowAccount": "0",
   "queryBalance": "5",
   "setAccount": "0",

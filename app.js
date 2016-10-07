@@ -13,8 +13,8 @@ var erisdbURL = "http://172.141.20.7:1337/rpc";
 
 // get the abi and deployed data squared away
 var contractData = require('./epm.json');
-var idisContractAddress = contractData["deployBank"];
-var idisAbi = JSON.parse(fs.readFileSync("./abi/" + Bank));
+var idisContractAddress = contractData["Bank"];
+var idisAbi = JSON.parse(fs.readFileSync("./abi/" + idisContractAddress));
 
 // properly instantiate the contract objects manager using the erisdb URL
 // and the account data (which is a temporary hack)
