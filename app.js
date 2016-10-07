@@ -41,7 +41,7 @@ function createAccount() {
   prompt.start();
   prompt.get(['value'], function (error, result) {
     if (error) { throw error }
-    registerNewAccount(toHex("micuenta@gmail.com"))
+    registerNewAccount(result.value)
   });
 }
 
@@ -49,9 +49,20 @@ function createAccount() {
 // contract using the value which was recieved from the
 // createAccount prompt
 function registerNewAccount(value) {
-  idisContract.registerNewAccount(value, function(error, result){
+  var valueHex = toHex(value);
+  idisContract.registerNewAccount(valueHex, function(error, result){
     if (error) { throw error }
     console.log("Create account:\t\t\t" + result.toNumber()); 
+    //endow(function(){});
+    getBalance(value);
+  });
+}
+
+function getBalance(user) {
+  var userHex = toHex(user);
+  idisContract.getBalance(userHex, function(error, result){
+    if (error) { throw error }
+    console.log("Balance for user\t\t\t" +  user  + " " + result.toNumber()); 
     //endow(function(){});
   });
 }
