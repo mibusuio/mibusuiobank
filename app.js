@@ -34,6 +34,9 @@ var idisContract = contractsManager.newContractFactory(idisAbi).at(idisContractA
 //   });
 // }
 
+
+var addressSetSub;
+
 // prompt the user to change the value of idi's contract
 function createAccount() {
   prompt.message = "Crear cuenta:";
@@ -99,6 +102,20 @@ function toHex(str) {
   }
   return hex;
 }
+
+idisContract.LogPaymentBusMade(startCallback, eventCallback);
+ 
+    function startCallback(error, eventSub){
+        if(error){ 
+            throw error;
+        }
+        addressSetSub = eventSub;
+    }
+ 
+    function eventCallback(error, event){
+        console.log("Se llama event")
+        console.log(event); 
+    }
 
 // run
 //getValue(createAccount);

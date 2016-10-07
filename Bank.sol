@@ -35,6 +35,9 @@ contract Bank {
     mapping(bytes32 => Account) accounts;
     mapping(address => bytes32) public names;
 
+
+    event LogPaymentBusMade(bytes32 accountId, uint amount, String busId);
+
     // Constructor
     function Bank(){
         owner = msg.sender;
@@ -101,6 +104,7 @@ contract Bank {
             return INSUFFICIENT_BALANCE;
         }else {
             accounts[user].balance -= amount;
+            LogPaymentBusMade(user, amount, "desde bus 123456789");
             return SUCCESS;
         }
     }
