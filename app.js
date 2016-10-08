@@ -160,15 +160,12 @@ function eventCallback(error, event){
 }
 
 function payment(user, ammount, message) {
+  console.log("call payment");
   var userHex = toHex(user);
   var messageHex = toHex(message);
   idisContract.payment(userHex, ammount, messageHex, function(error, result){
     if (error) { throw error }
     console.log("payment for user\t\t\t" +  user  + " " + result.toNumber()); 
-    if(result.toNumber() == 21 ){
-       endow(user, 1000, "Prueba de endow");
-    }
-    getBalance(user);
   });
 }
 
@@ -200,8 +197,11 @@ function read(deviceID) {
 
   nfcdev.on('read', function(tag) {
     console.log(util.inspect(tag, { depth: null }));
-    if ((!!tag.data) && (!!tag.offset)) console.log(util.inspect(nfc.parse(tag.data.slice(tag.offset)), { depth: null }));
-    payment("1720439866", 21, "payment")
+    if ((!!tag.data) && (!!tag.offset)) {
+      console.log(util.inspect(nfc.parse(tag.data.slice(tag.offset)), { depth: null }));
+      payment("1720439866", 21, "payment");
+    }
+      
     //nfcdev.stop();
   });
 
