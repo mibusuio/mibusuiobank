@@ -36,7 +36,7 @@ contract Bank {
     mapping(address => bytes32) public names;
 
 
-    event LogPaymentBusMade(bytes32 accountId, uint amount, uint busId);
+    event LogPaymentBusMade(string accountId, uint amount, string busId);
 
     // Constructor
     function Bank(){
@@ -105,7 +105,7 @@ contract Bank {
         }else {
             accounts[user].balance -= amount;
 	    var userId = bytes32ToString(user);
-            LogPaymentBusMade(user, amount, 1234);
+            LogPaymentBusMade("usuario string", amount, "123456789");
             return SUCCESS;
         }
     }

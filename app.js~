@@ -67,8 +67,8 @@ function getBalance(user) {
     if (error) { throw error }
     console.log("Balance for user\t\t\t" +  user  + " " + result.toNumber()); 
     //endow(function(){});
-    //endow(user, 1000, "Prueba de endow");
-    payment(user, 100, "prueba de payment")
+    endow(user, 1000, "Prueba de endow");
+    //payment(user, 100, "prueba de payment")
   });
 }
 
