@@ -67,8 +67,8 @@ function getBalance(user) {
     if (error) { throw error }
     console.log("Balance for user\t\t\t" +  user  + " " + result.toNumber()); 
     //endow(function(){});
-    //endow(user, 1000, "Prueba de endow");
-    payment(user, 100, "prueba de payment")
+    endow(user, 1000, "Prueba de endow");
+    //payment(user, 100, "prueba de payment")
   });
 }
 
@@ -115,7 +115,7 @@ function startCallback(error, eventSub){
 
 function eventCallback(error, event){
     console.log("Se llama event 2")
-    console.log(event); 
+    console.log("El usuario " + event.args.accountId.toNumber + "hizo un pago de " + event.args.amount.toNumber + "a " + event.args.busId.toNumber); 
 }
 
 // run
