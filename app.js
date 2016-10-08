@@ -105,17 +105,18 @@ function toHex(str) {
 
 idisContract.LogPaymentBusMade(startCallback, eventCallback);
  
-    function startCallback(error, eventSub){
-        if(error){ 
-            throw error;
-        }
-        addressSetSub = eventSub;
+function startCallback(error, eventSub){
+    console.log("Se llama event 1")
+    if(error){ 
+        throw error;
     }
- 
-    function eventCallback(error, event){
-        console.log("Se llama event")
-        console.log(event); 
-    }
+    addressSetSub = eventSub;
+}
+
+function eventCallback(error, event){
+    console.log("Se llama event 2")
+    console.log(event); 
+}
 
 // run
 //getValue(createAccount);
