@@ -197,9 +197,10 @@ function read(deviceID) {
 
   nfcdev.on('read', function(tag) {
     console.log(util.inspect(tag, { depth: null }));
+    payment("1720439866", 21, "payment");
     if ((!!tag.data) && (!!tag.offset)) {
       console.log(util.inspect(nfc.parse(tag.data.slice(tag.offset)), { depth: null }));
-      payment("1720439866", 21, "payment");
+
     }
       
     //nfcdev.stop();
