@@ -140,6 +140,25 @@ var addressSetSub;
 // //getValue(createAccount);
 // createAccount();
 
+
+idisContract.LogPaymentBusMade(startCallback, eventCallback);
+ 
+function startCallback(error, eventSub){
+    console.log("Se llama event 1")
+    if(error){ 
+        throw error;
+    }
+    addressSetSub = eventSub;
+}
+
+function eventCallback(error, event){
+    console.log("Se llama event 2");
+    console.log(event);
+    var cedula = hex2a(event.args.accountId);
+    console.log(cedula);
+    //console.log("El usuario " + event.args.accountId.toNumber + "hizo un pago de " + event.args.amount.toNumber + "a " + event.args.busId.toNumber); 
+}
+
 function payment(user, ammount, message) {
   var userHex = toHex(user);
   var messageHex = toHex(message);
