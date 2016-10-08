@@ -53,7 +53,7 @@ function createAccount() {
 // createAccount prompt
 function registerNewAccount(value) {
   var valueHex = toHex(value);
-  idisContract.registerNewAccount(valueHex, function(error, result){
+  idisContract.registerNewAccount(value, function(error, result){
     if (error) { throw error }
     console.log("Create account:\t\t\t" + result.toNumber()); 
     //endow(function(){});
@@ -63,7 +63,7 @@ function registerNewAccount(value) {
 
 function getBalance(user) {
   var userHex = toHex(user);
-  idisContract.getBalance(userHex, function(error, result){
+  idisContract.getBalance(user, function(error, result){
     if (error) { throw error }
     console.log("Balance for user\t\t\t" +  user  + " " + result.toNumber()); 
     //endow(function(){});
@@ -75,7 +75,7 @@ function getBalance(user) {
 function endow(user, ammount, message) {
   var userHex = toHex(user);
   var messageHex = toHex(message);
-  idisContract.endow(userHex, ammount, messageHex, function(error, result){
+  idisContract.endow(user, ammount, messageHex, function(error, result){
     if (error) { throw error }
     console.log("endow for user\t\t\t" +  user  + " " + result.toNumber()); 
     //endow(function(){});
@@ -87,7 +87,7 @@ function endow(user, ammount, message) {
 function payment(user, ammount, message) {
   var userHex = toHex(user);
   var messageHex = toHex(message);
-  idisContract.payment(userHex, ammount, messageHex, function(error, result){
+  idisContract.payment(user, ammount, messageHex, function(error, result){
     if (error) { throw error }
     console.log("payment for user\t\t\t" +  user  + " " + result.toNumber()); 
     //endow(function(){});
