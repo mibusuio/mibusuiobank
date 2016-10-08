@@ -1,0 +1,11 @@
+{
+  "Bank": "41E23CC5274BD53EF00B7849684C88BD3E4D0962",
+  "assertStorage": "passed",
+  "defaultAddr": "33C4D4D192708086869B0BC7FBAE51A2E0B9A37E",
+  "endowAccount": "0",
+  "queryBalance": "5",
+  "setAccount": "0",
+  "setAccountBase": "fledesma@outlook.com",
+  "setMessageBase": "esto es una prueba",
+  "setStorageBase": "5"
+}

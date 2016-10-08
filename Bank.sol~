@@ -104,6 +104,7 @@ contract Bank {
             return INSUFFICIENT_BALANCE;
         }else {
             accounts[user].balance -= amount;
+	        var userId = bytes32ToString(user);
             LogPaymentBusMade(user, amount, 11);
             return SUCCESS;
         }

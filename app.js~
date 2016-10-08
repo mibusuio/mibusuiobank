@@ -105,15 +105,6 @@ function toHex(str) {
   return hex;
 }
 
-function hex2a(hex) {
-    var str = '';
-    for (var i = 0; i < hex.length; i += 2) {
-        var v = parseInt(hex.substr(i, 2), 16);
-        if (v) str += String.fromCharCode(v);
-    }
-    return str;
-} 
-
 idisContract.LogPaymentBusMade(startCallback, eventCallback);
  
 function startCallback(error, eventSub){
@@ -127,8 +118,6 @@ function startCallback(error, eventSub){
 function eventCallback(error, event){
     console.log("Se llama event 2");
     console.log(event);
-    var cedula = hex2a(event.args.accountId);
-    console.log(cedula);
     //console.log("El usuario " + event.args.accountId.toNumber + "hizo un pago de " + event.args.amount.toNumber + "a " + event.args.busId.toNumber); 
 }
 
