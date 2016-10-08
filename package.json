@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "dependencies": {
     "eris-contracts": "^0.13.1",
-    "prompt": "*"
+    "prompt": "*",
+    "nfc": "^0.3.3"
   }
 }

@@ -2,6 +2,10 @@
 var fs = require ('fs');
 var prompt = require('prompt');
 var erisC = require('eris-contracts');
+var nfc  = require('nfc').nfc
+var util = require('util');
+var version = nfc.version();
+var devices = nfc.scan();
 
 // NOTE. On Windows/OSX do not use localhost. find the
 // url of your chain with:
@@ -37,52 +41,104 @@ var idisContract = contractsManager.newContractFactory(idisAbi).at(idisContractA
 
 var addressSetSub;
 
-// prompt the user to change the value of idi's contract
-function createAccount() {
-  prompt.message = "Crear cuenta:";
-  prompt.delimiter = "\t";
-  prompt.start();
-  prompt.get(['value'], function (error, result) {
-    if (error) { throw error }
-    registerNewAccount(result.value)
-  });
-}
+// // prompt the user to change the value of idi's contract
+// function createAccount() {
+//   prompt.message = "Crear cuenta:";
+//   prompt.delimiter = "\t";
+//   prompt.start();
+//   prompt.get(['value'], function (error, result) {
+//     if (error) { throw error }
+//     registerNewAccount(result.value)
+//   });
+// }
 
-// using eris-contracts call the `set` function of idi's
-// contract using the value which was recieved from the
-// createAccount prompt
-function registerNewAccount(value) {
-  var valueHex = toHex(value);
-  idisContract.registerNewAccount(valueHex, function(error, result){
-    if (error) { throw error }
-    console.log("Create account:\t\t\t" + result.toNumber()); 
-    //endow(function(){});
-    getBalance(value);
-  });
-}
+// // using eris-contracts call the `set` function of idi's
+// // contract using the value which was recieved from the
+// // createAccount prompt
+// function registerNewAccount(value) {
+//   var valueHex = toHex(value);
+//   idisContract.registerNewAccount(valueHex, function(error, result){
+//     if (error) { throw error }
+//     console.log("Create account:\t\t\t" + result.toNumber()); 
+//     //endow(function(){});
+//     getBalance(value);
+//   });
+// }
 
-function getBalance(user) {
-  var userHex = toHex(user);
-  idisContract.getBalance(userHex, function(error, result){
-    if (error) { throw error }
-    console.log("Balance for user\t\t\t" +  user  + " " + result.toNumber()); 
-    //endow(function(){});
-    //endow(user, 1000, "Prueba de endow");
-    payment(user, 100, "prueba de payment")
-  });
-}
+// function getBalance(user) {
+//   var userHex = toHex(user);
+//   idisContract.getBalance(userHex, function(error, result){
+//     if (error) { throw error }
+//     console.log("Balance for user\t\t\t" +  user  + " " + result.toNumber()); 
+//     //endow(function(){});
+//     //endow(user, 1000, "Prueba de endow");
+//     payment(user, 100, "prueba de payment")
+//   });
+// }
 
-function endow(user, ammount, message) {
-  var userHex = toHex(user);
-  var messageHex = toHex(message);
-  idisContract.endow(userHex, ammount, messageHex, function(error, result){
-    if (error) { throw error }
-    console.log("endow for user\t\t\t" +  user  + " " + result.toNumber()); 
-    //endow(function(){});
-    getBalance(user);
+// function endow(user, ammount, message) {
+//   var userHex = toHex(user);
+//   var messageHex = toHex(message);
+//   idisContract.endow(userHex, ammount, messageHex, function(error, result){
+//     if (error) { throw error }
+//     console.log("endow for user\t\t\t" +  user  + " " + result.toNumber()); 
+//     //endow(function(){});
+//     getBalance(user);
     
-  });
-}
+//   });
+// }
+
+// function payment(user, ammount, message) {
+//   var userHex = toHex(user);
+//   var messageHex = toHex(message);
+//   idisContract.payment(userHex, ammount, messageHex, function(error, result){
+//     if (error) { throw error }
+//     console.log("payment for user\t\t\t" +  user  + " " + result.toNumber()); 
+//     if(result.toNumber() == 21 ){
+//        endow(user, 1000, "Prueba de endow");
+//     }
+//     getBalance(user);
+//   });
+// }
+
+// function toHex(str) {
+//   var hex = '';
+//   for(var i=0;i<str.length;i++) {
+//     hex += ''+str.charCodeAt(i).toString(16);
+//   }
+//   return hex;
+// }
+
+// function hex2a(hex) {
+//     var str = '';
+//     for (var i = 0; i < hex.length; i += 2) {
+//         var v = parseInt(hex.substr(i, 2), 16);
+//         if (v) str += String.fromCharCode(v);
+//     }
+//     return str;
+// } 
+
+// idisContract.LogPaymentBusMade(startCallback, eventCallback);
+ 
+// function startCallback(error, eventSub){
+//     console.log("Se llama event 1")
+//     if(error){ 
+//         throw error;
+//     }
+//     addressSetSub = eventSub;
+// }
+
+// function eventCallback(error, event){
+//     console.log("Se llama event 2");
+//     console.log(event);
+//     var cedula = hex2a(event.args.accountId);
+//     console.log(cedula);
+//     //console.log("El usuario " + event.args.accountId.toNumber + "hizo un pago de " + event.args.amount.toNumber + "a " + event.args.busId.toNumber); 
+// }
+
+// // run
+// //getValue(createAccount);
+// createAccount();
 
 function payment(user, ammount, message) {
   var userHex = toHex(user);
@@ -96,6 +152,7 @@ function payment(user, ammount, message) {
     getBalance(user);
   });
 }
+
 
 function toHex(str) {
   var hex = '';
@@ -114,25 +171,31 @@ function hex2a(hex) {
     return str;
 } 
 
-idisContract.LogPaymentBusMade(startCallback, eventCallback);
- 
-function startCallback(error, eventSub){
-    console.log("Se llama event 1")
-    if(error){ 
-        throw error;
-    }
-    addressSetSub = eventSub;
+
+console.log('version: ' + util.inspect(version, { depth: null }));
+console.log('devices: ' + util.inspect(devices, { depth: null }));
+
+function read(deviceID) {
+  console.log('');
+  var nfcdev = new nfc.NFC();
+
+  nfcdev.on('read', function(tag) {
+    console.log(util.inspect(tag, { depth: null }));
+    if ((!!tag.data) && (!!tag.offset)) console.log(util.inspect(nfc.parse(tag.data.slice(tag.offset)), { depth: null }));
+    payment("1720439866", 21, "payment")
+    //nfcdev.stop();
+  });
+
+  nfcdev.on('error', function(err) {
+    console.log(util.inspect(err, { depth: null }));
+  });
+
+  nfcdev.on('stopped', function() {
+    console.log('stopped');
+  });
+
+  console.log(nfcdev.start(deviceID));
 }
 
-function eventCallback(error, event){
-    console.log("Se llama event 2");
-    console.log(event);
-    var cedula = hex2a(event.args.accountId);
-    console.log(cedula);
-    //console.log("El usuario " + event.args.accountId.toNumber + "hizo un pago de " + event.args.amount.toNumber + "a " + event.args.busId.toNumber); 
-}
-
-// run
-//getValue(createAccount);
-createAccount();
+for (var deviceID in devices) read(deviceID);
 
